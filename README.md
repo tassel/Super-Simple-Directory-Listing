@@ -1,5 +1,5 @@
 # Super-Simple-Directory-Listing
-### Directory listing to listing folders on you server in a nicer way than default
+### Directory listing to list sub folders on you server in a nicer way than default
 
 > [!NOTE]
 > Usage: Put both files in the folder you want to list all subfolders in.
