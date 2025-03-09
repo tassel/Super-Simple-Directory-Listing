@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Simple Directory Listing</title>
+    <style>
+        body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            padding: 10px;
+        }
+        .container {
+            background-color: #161b22;
+            padding: 20px;
+            border-radius: 3px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            border: 1px solid #30363d;
+            width: 100%;
+            max-width: 400px;
+        }
+        h1 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        li {
+            margin: 5px 0;
+        }
+        a {
+            display: block;
+            padding: 8px;
+            background-color: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 3px;
+            text-decoration: none;
+            color: #58a6ff;
+            transition: background 0.2s;
+        }
+        a:hover {
+            background-color: #30363d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📂 Directory Listing</h1>
+        <ul id="directory-list"></ul>
+    </div>
+
+<script>
+    async function fetchDirectories() {
+        try {
+            let response = await fetch('list-directories.php'); // Fetch from PHP script
+            if (!response.ok) throw new Error("Failed to load directories.");
+            
+            let directories = await response.json();
+            let list = document.getElementById("directory-list");
+            list.innerHTML = "";
+
+            directories.forEach(dir => {
+                let li = document.createElement("li");
+                li.innerHTML = `<a href="${dir}/">📁 ${dir}</a>`;
+                list.appendChild(li);
+            });
+        } catch (error) {
+            console.error("Error fetching directories:", error);
+        }
+    }
+    
+    fetchDirectories();
+</script>
+
+</body>
+</html>
